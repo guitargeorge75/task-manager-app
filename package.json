@@ -1,0 +1,19 @@
+{
+  "name": "task-app-training",
+  "version": "1.0.0",
+  "description": "Task App using Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "task",
+    "nodejs",
+    "training"
+  ],
+  "author": "Subhayu Mukherjee",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.5.9"
+  }
+}
