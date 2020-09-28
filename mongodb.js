@@ -19,53 +19,83 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
 
     const db = client.db(DBName);
 
-    // db.collection('users').insertOne({
-    //     name: 'Danny',
+    // db.collection('users').findOne({
+    //     _id: new ObjectID('5f0393ee0de33c21b6c7e69b')
+    // }, (err, user) => {
+    //     if (err) {
+    //         return console.log('User not found')
+    //     }
+    //     console.log(user);
+    // });
+
+    // db.collection('users').find({
     //     age: 33
-    // }, (error, result) => {
-    //     if (error) {
-    //         return console.log('Error filling document');
+    // }).count((err, count) => {
+    //     if (err) {
+    //         return console.log('not found!')
     //     }
+    //     return console.log(count);
+    // });
 
-    //     console.log(result.ops);
-    // })
-
-    // db.collection('users').insertMany([
-    //     {
-    //         name: 'Andrew',
-    //         age: 30
-    //     },
-    //     {
-    //         name: 'Laddu',
-    //         age: 36
+    // db.collection('tasks').find({
+    //     completed: true
+    // }).toArray((err, tasks) => {
+    //     if (err) {
+    //         return console.log('not found!')
     //     }
-    // ], (error, result) => {
-    //     if (error) {
-    //         return console.log('Unable to insert Document');
+    //     return console.log(tasks);
+    // });
+
+    // db.collection('tasks').findOne({
+    //     _id: new ObjectID('5f0388f7f307801ca5d189fb')
+    // }, (err, task) => {
+    //     if (err) {
+    //         return console.log('User not found')
     //     }
+    //     console.log(task);
+    // });
 
-    //     console.log(result.ops);
-    // })
+    // db.collection('users').updateOne({
+    //     _id: new ObjectID('5f037f2d252e6717eb4681b0'),
 
-    // db.collection('tasks').insertMany([
-    //     {
-    //         description: 'Finish Recording',
+    // },{
+    //     $inc: {
+    //         age: 1
+    //     }
+    // }).then((result) => {
+    //     console.log('Success', result)
+    // }).catch((error) => {
+    //     console.log('Error!', error)
+    // });
+
+    // db.collection('tasks').updateMany({
+    //     completed: false
+
+    // },{
+    //     $set: {
     //         completed: true
-    //     },
-    //     {
-    //         description: 'Buy groceries',
-    //         completed: false
-    //     },
-    //     {
-    //         description: 'File Taxes',
-    //         completed: true
     //     }
-    // ], (error, result) => {
-    //     if (error) {
-    //         return console.log('Unable to insert tasks');
-    //     }
+    // }).then((result) => {
+    //     console.log('Success', result.modifiedCount)
+    // }).catch((error) => {
+    //     console.log('Error!', error)
+    // });
 
-    //     console.log(result.ops);
+    // db.collection('users').deleteMany({
+    //     age: 15
+    // }).then((result) => {
+    //     console.log('Success', result.modifiedCount)
+    // }).catch((err) => {
+    //     console.log('Error', err)
     // })
+
+    db.collection('tasks').deleteOne({
+        description: "Finish Recording"
+    }).then((result) => {
+        console.log('Success', result)
+    }).catch((err) => {
+        console.log('Error', err)
+    })
+
 })
 
