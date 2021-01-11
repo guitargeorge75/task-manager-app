@@ -15,16 +15,17 @@ app.listen(port, () => {
     console.log('app is up and running!');
 });
 
-// const myFunc = async () => {
-//     const password = 'red1234!';
-//     const hashedPassword = await bcrypt.hash(password, 8);
-//     console.log(password);
-//     console.log(hashedPassword);
+const Task = require('./models/task');
+const User = require('./models/user');
 
-//     const isMatch = await bcrypt.compare('red1234', hashedPassword);
+const main = async () => {
+    // const task = await Task.findById('5ff3b4ea2595e03ee7fe5933');
+    // await task.populate('owner').execPopulate();
+    // console.log(task.owner);
 
-//     console.log(isMatch);
-// };
+    const user = await User.findById('5ff3b3ebe3bf783ea3f2d282');
+    await user.populate('tasks').execPopulate();
+    console.log(user.tasks);
+}
 
-// myFunc();
-
+main()
