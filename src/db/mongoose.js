@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const connectionURL = `mongodb://${process.env.MONGODBHOST}:${process.env.MONGODBPORT}/${process.env.MONGODBNAME}`;
+const connectionURL = process.env.MONGODBCONNECTIONSTRING;
 
 function connect() {
     mongoose.connect(connectionURL, {
