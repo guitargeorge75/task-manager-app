@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const config = require('../../config');
 
-const connectionURL = `mongodb://${config.host}:${config.port}/task-manager-api`;
+const connectionURL = `mongodb://${process.env.MONGODBHOST}:${process.env.MONGODBPORT}/${process.env.MONGODBNAME}`;
 
 function connect() {
     mongoose.connect(connectionURL, {
