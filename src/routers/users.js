@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/user');
+const hbs = require('hbs');
 const auth = require('../middleware/auth');
 const multer = require('multer');
 const upload = multer({
@@ -8,7 +9,6 @@ const upload = multer({
     },
     fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(jpeg|jpg|png)$/)) {
-            console.log('here!!!!')
             return cb(new Error('Only JPEG, JPG and PNG file types allowed.'))
         };
         cb(null, true);
@@ -16,6 +16,10 @@ const upload = multer({
 });
 
 const router = new express.Router();
+
+router.get('/', async(req, res) => {
+    res.render('login');
+}); 
 
 router.post('/users', async (req, res) => {
     const user = new User(req.body);
@@ -41,7 +45,7 @@ router.post('/users/login', async (req, res) => {
             token
         });
     } catch (e) {
-        res.status(400).send('Unable to Login');
+        res.status(400).send({error: 'Unable to Login'});
     }
 });
 
@@ -110,7 +114,6 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
 
 router.delete('/users/me/avatar', auth, async (req, res) => {
     req.user.avatar = undefined;
-    console.log('heere!!!');
     await req.user.save();
     res.sendStatus(200);
 });
